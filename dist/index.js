@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = configureApp;
+
 require('babel-polyfill');
 
 var _express = require('express');
@@ -16,16 +21,28 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express2.default)();
+/**
+ *
+ * @param configureServer {Function}
+ * @param configureRoutes {Function}
+ */
+function configureApp(cfg) {
+    var app = (0, _express2.default)();
 
-(0, _config2.default)(app);
-(0, _routes2.default)(app);
+    // Configure local server configuration and routes
+    (0, _config2.default)(app);
+    (0, _routes2.default)(app);
 
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
+    // Configure custom server configuration and routes
+    cfg.configureServer(app);
+    cfg.configureRoutes(app);
 
-app.listen(port);
-console.log('Server running at http://127.0.0.1:' + port); // eslint-disable-line no-console
+    // set the port of our application
+    // process.env.PORT lets the port be set by Heroku
+    var port = process.env.PORT || 8080;
 
-module.exports = app;
+    app.listen(port);
+    console.log('Server running at http://127.0.0.1:' + port); // eslint-disable-line no-console
+
+    return app;
+}
