@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+- '5'
+env:
+- NODE_ENV=TEST CXX=g++-4.8
+services:
+- postgresql
+addons:
+  postgresql: '9.4'
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+before_script:
+- psql -c 'create database aws;' -U postgres
+- sleep 15
+install:
+- travis_retry npm install -g node-gyp
+- travis_retry npm install
+- sleep 15
+script:
+- travis_retry npm run lint
+- travis_retry npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: pzQfnZ7PLEHnqWLX5riUXWvr09u65FG4Vrg/Yt5KeqmrZDXvpV1Qj40+jZZBN53Wm2l1xRGE9veLSs94uiZq8pUlQRHMbJiyLtg8CC5SLEKnPEBiZXJxuDxpHYKqegA5EBc5nnbAMBSamA6WQzzFxpwiSeujehoyJgcm0HEW9/3YUPc8YKyvSk1fCOgzW7loRmWKbb5c4jlfmEoiI8lsbOsiqPmBQiB+YpNM2WzFqLZWSIqO5BS+Is85zOOrk/RzYapIMG2545EGTDg1E0arIbOJsfbuUN8t0Jai/nuziEii51K5llmfMSRHZOydaIgo4tnv7Su4Ty5lKP+OW38Q3+4d2c2ANguMYDy51nUGbB7apQswqppQbtOM9jvoxvQQe01k9fvnonkqQ0gCddFlyNTxuMeF5cP1UZkTv4tUTOos6w+QPO2fuJBMqqm25AXUeUk5qYUICsAOKayJXUcnYXa7JsuqoZWmhTtDXt8GvSQELBo9xkudEa0O1jvP88k9KqghNMcQuoSSBUuf6W4OPaLB4UxkMDYgb3HiYsQTVlFiG3NtjXBF+tdOCcEH8/SnPcvEXWgbPzUWUoO+Eo7VOa01NoaYntS+3JCrKjuS65L2Lt3AC8s7b1EiaQRlbQUpNt3ffVN2mLJI1pgsy6olYWHxKr9KOqsCeybtdeUvO/Y=
+  app: pacific-refuge-84094
+  on:
+    repo: jseminck/jseminck-be-api-authentication
+  skip_cleanup: true
