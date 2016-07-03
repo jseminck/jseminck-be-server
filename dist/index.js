@@ -29,9 +29,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function configureApp(cfg) {
     var app = (0, _express2.default)();
 
-    app.set('view engine', 'jade');
+    // console.log("cfg.index", cfg.index);
     app.get('/', function (req, res) {
-        return res.render(cfg.index);
+        return res.send(cfg.index);
     });
 
     // Configure local server configuration and routes
