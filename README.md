@@ -17,7 +17,7 @@ import configureRoutes from './routes/';
 module.exports = configureApp({
     configureServer: configureServer,
     configureRoutes: configureRoutes,
-    index: 'index.jade'
+    index: '<html><body><p>Hello World</p></body></html>'
 });
 ```
 
@@ -53,16 +53,15 @@ export function configureAuthenticationRoutes (app) {
 }
 ```
 
-And index.jade is just a general .jade view file:
+And index is the HTML which should be served for the `/` GET request, e.g:
 ```
-doctype html
-html(lang="en")
-  head
-    title Hello World
-  body
-    h1 Hello World
-    #container
-      p Hello World
+<html>
+  <body>
+    <p>
+      Hello World
+    </p>
+  </body>
+</html>
 ```
 
 
