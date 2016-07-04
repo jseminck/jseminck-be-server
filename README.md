@@ -4,7 +4,7 @@
 
 Common server code in Express that is shared amongst all `jseminck-be-api` services.
 
-# API
+## API
 
 Generally, you will use the API as such:
 
