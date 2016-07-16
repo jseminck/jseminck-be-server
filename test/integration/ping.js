@@ -10,8 +10,6 @@ describe('/api/ping', () => {
     it("returns ping information on GET", (done) => {
         supertest(app)
             .get('/api/ping')
-            .expect(200, {
-                ping: 'Hello World'
-            }, done);
+            .expect(200, done);
     });
 });
