@@ -4,3 +4,65 @@
 
 Common server code in Express that is shared amongst all `jseminck-be-api` services.
 
+# API
+
+Generally, you will use the API as such:
+
+```js
+import configureApp from 'jseminck-be-server';
+
+import configureServer from './config/';
+import configureRoutes from './routes/';
+
+module.exports = configureApp({
+    configureServer: configureServer,
+    configureRoutes: configureRoutes,
+    index: 'index.jade'
+});
+```
+
+Where configureServer could look like:
+```js
+export default function configure() {
+    configureDb();
+}
+
+function configureDb() {
+    setupSomeDatabase({
+       host: 'localhost',
+       port: 5432,
+       database: 'myDb',
+       username: 'myUser',
+       password: 'myPass'
+   });
+}
+```
+
+And configureRoutes could look like:
+```js
+export default function configureRoutes (app) {
+    configureAuthenticationRoutes(app);
+}
+
+export function configureAuthenticationRoutes (app) {
+    app.route('/myFirstRoute')
+        .post(post.bind(app));
+
+    app.route('/mySecondRoute')
+        .get(verify.bind(app));
+}
+```
+
+And index.jade is just a general .jade view file:
+```
+doctype html
+html(lang="en")
+  head
+    title Hello World
+  body
+    h1 Hello World
+    #container
+      p Hello World
+```
+
+
