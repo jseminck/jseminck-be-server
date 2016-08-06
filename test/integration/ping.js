@@ -12,14 +12,4 @@ describe('/api/ping', () => {
             .get('/api/ping')
             .expect(200, done);
     });
-
-    it("returns ping information on GET", (done) => {
-        supertest(app)
-            .get('/api/body')
-            .send({hello: "world"})
-            .expect((res) => {
-                expect(res.body).to.eql({body: {hello: "world"}});
-            })
-            .end(done);
-    });
 });
