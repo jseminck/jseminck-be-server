@@ -15,7 +15,7 @@ describe('/api/ping', () => {
 
     it("returns ping information on GET", (done) => {
         supertest(app)
-            .post('/api/ping')
+            .get('/api/body')
             .send({hello: "world"})
             .expect((res) => {
                 expect(res.body).to.eql({body: {hello: "world"}});
