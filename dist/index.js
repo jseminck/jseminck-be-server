@@ -33,12 +33,10 @@ function configureApp(cfg) {
         return res.send(cfg.index);
     });
 
-    // Configure custom server configuration and routes
     cfg.configureServer(app);
-    cfg.configureRoutes(app);
-
-    // Configure local server configuration and routes
     (0, _config2.default)(app);
+
+    cfg.configureRoutes(app);
     (0, _routes2.default)(app);
 
     // set the port of our application

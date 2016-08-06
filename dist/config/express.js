@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function configureExpress(app) {
     app.use(_bodyParser2.default.json());
-    app.use(_bodyParser2.default.urlencoded({ extended: false }));
+    // app.use(bodyParser.urlencoded({extended: false}));
     app.use((0, _morgan2.default)('dev'));
     app.set('jwtKey', process.env.JSEMINCK_BE_KEY);
 }
