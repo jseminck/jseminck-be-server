@@ -5,7 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = configureCors;
 function configureCors(app) {
-    console.log("Setting up CORS");
+    console.log("Setting up CORS"); // eslint-disable-line no-console
+
     app.use(function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
