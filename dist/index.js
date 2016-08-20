@@ -25,6 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *   @param {Function} cfg configureRoutes
  *   @param {String} cfg.staticFolder
  *   @param {String} cfg.index HTML to serve for the index file
+ *   @param {Number} cfg.port
  */
 function configureApp(cfg) {
     var app = (0, _express2.default)();
@@ -41,7 +42,7 @@ function configureApp(cfg) {
 
     // set the port of our application
     // process.env.PORT lets the port be set by Heroku
-    var port = process.env.PORT || 8080;
+    var port = cfg.port || process.env.PORT || 8080;
 
     app.listen(port);
     console.log('Server running at http://127.0.0.1:' + port); // eslint-disable-line no-console
